@@ -1,0 +1,5 @@
+{
+  "name": "Gospel Timeline",
+  "description": "An interactive, horizontal-scrolling timeline of the life of Jesus Christ as documented in the New Testament Gospels. Filter events by book (Matthew, Mark, Luke, John) to compare narratives.",
+  "requestFramePermissions": []
+}
