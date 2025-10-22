@@ -7,9 +7,11 @@ import FilterControls from './components/FilterControls';
 import Timeline from './components/Timeline';
 import WorldTimeline from './components/WorldTimeline';
 import TimelineRuler from './components/TimelineRuler';
+import AboutModal from './components/AboutModal';
 
 const App: React.FC = () => {
   const [selectedGospels, setSelectedGospels] = useState<Gospel[]>(GOSPEL_NAMES);
+  const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
   const mainTimelineRef = useRef<HTMLDivElement>(null);
   const worldTimelineRef = useRef<HTMLDivElement>(null);
   const rulerRef = useRef<HTMLDivElement>(null);
@@ -129,13 +131,19 @@ const App: React.FC = () => {
   return (
     <div className="bg-gray-900 text-white min-h-screen font-sans flex flex-col">
       <header className="sticky top-0 z-30">
-        <div className="p-4 bg-gray-900/70 backdrop-blur-lg">
+        <div className="p-4 bg-gray-900/70 backdrop-blur-lg relative">
           <h1 className="text-4xl font-bold text-center text-cyan-400 tracking-wider">
             Gospel Harmony Timeline
           </h1>
           <p className="text-center text-gray-400 mt-1">
             An interactive visualization of the life of Christ across the four Gospels.
           </p>
+          <button
+            onClick={() => setIsAboutModalOpen(true)}
+            className="absolute top-4 right-4 bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-1 px-3 rounded-full text-sm"
+          >
+            About
+          </button>
         </div>
         <FilterControls selectedGospels={selectedGospels} setSelectedGospels={setSelectedGospels} />
       </header>
@@ -163,6 +171,7 @@ const App: React.FC = () => {
           <WorldTimeline ref={worldTimelineRef} events={worldEventsData} {...timelineProps} />
         </div>
       </main>
+      {isAboutModalOpen && <AboutModal onClose={() => setIsAboutModalOpen(false)} />}
     </div>
   );
 };
